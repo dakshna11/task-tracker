@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server";
 import { connectToDatabase } from "@/lib/mongodb";
 import Task from "@/models/Task";
+import { getCurrentUser } from "@/lib/getCurrentUser";
 
 export async function PATCH(request: Request, context: { params: Promise<{ id: string }> }) {
   try {
     await connectToDatabase();
     const body = await request.json();
     const {id} = await context.params;
-    //const user = await getcurre
+    const user = await getCurrentUser();
+
+    if(body.assignedTo && user.role !== "admin") {
+        return NextResponse.json({ message: "Forbidden" }, { status: 403 });
+    }
 
     const updatedData: any = {};
 
@@ -15,7 +20,7 @@ export async function PATCH(request: Request, context: { params: Promise<{ id: s
         updatedData.status = body.status;
     }
 
-    const userRole = "admin"; // This should come from your auth context/session
+    const userRole = user.role; // This should come from your auth context/session
 
     if(body.assignee && userRole === "admin") {
         updatedData.assignee = body.assignee;
