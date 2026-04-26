@@ -18,5 +18,5 @@ export default withAuth(
 )
 
 export const config = {
-    matcher: ["/api/tasks/:path*", "/api/auth/:path*"],
+     matcher: ["/dashboard/:path*", "/tasks/:path*", "/admin/:path*"],
 };
