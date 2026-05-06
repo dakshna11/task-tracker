@@ -1,29 +1,11 @@
 import { withAuth } from "next-auth/middleware";
 
-export default withAuth(
-    function middleware(req) {},
-    {
-        pages: {
-            signIn: "/login",
-        },
-        callbacks: {
-            authorized: ({token, req}) => {
-                const path = req.nextUrl.pathname;
-
-                if(path.startsWith('/admin')){
-                    return token?.role === 'admin';
-                }
-
-                if (path.startsWith("/login") || path.startsWith("/signup") || path.startsWith("/api/auth")) {
-                    return true;
-                }
-
-                return !!token;
-            }
-        }
-    }
-)
+export default withAuth({
+  pages: {
+    signIn: "/login",
+  },
+});
 
 export const config = {
-     matcher: ["/dashboard/:path*", "/tasks/:path*", "/admin/:path*"],
+  matcher: ["/dashboard/:path*", "/tasks/:path*", "/admin/:path*"],
 };
