@@ -1,5 +1,5 @@
-# task-tracker web application
+# Task Flow
 
-Simple task management app to track the daily task status with comment section.
-Similar like Jira.
-Upcoming: AI feature to autocomplete comments suggestions
+Simple task management application to track the daily task status.
+
+Deployed version - https://task-tracker-ecru-beta-45.vercel.app/
