@@ -4,6 +4,7 @@ import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styles from '@/styles/login.module.scss';
+import Image from 'next/image';
 
 export default function Login(){
     const [email, setEmail] = useState('');
@@ -26,24 +27,39 @@ export default function Login(){
 
     return(
         <div className={styles.container}>
-            <div className={styles.circle}></div>
-            <h2>Login</h2>
-            <p>Don't have an account? <a href="/signup">Sign up</a></p>
-            <form onSubmit={handleLogin} className={styles.formContainer}>
-                <input 
-                type='email'
-                placeholder='Email'
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                />
-                <input 
-                type='password'
-                placeholder='Password'
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type='submit'>Login</button>
-            </form>
+            <div className={styles.formContainer}>
+                <h2>Login</h2>
+                <p>Don't have an account? <a href="/signup">Sign up</a></p>
+                <form onSubmit={handleLogin} >
+                    <div className={styles.field}>
+                        <label>Email</label>
+                        <input 
+                            type='email'
+                            placeholder='Email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
+                    </div>
+                    <div className={styles.field}>
+                        <label>Password</label>
+                        <input 
+                            type='password'
+                            placeholder='Password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </div>
+                    <button type='submit' className={styles.button}>
+                        Login
+                    </button>
+                </form>
+            </div>
+            <Image
+                src="/login.png"
+                alt="Task Flow dashboard preview"
+                width={1100}
+                height={750}
+            />
         </div>
     )
 }
